@@ -292,7 +292,7 @@ You need to run `main.js` as a CommonJS module. If you have the `type` property 
 
 Node wraps every module implicitly with a function. When you execute a module, Node calls that function, and - as the output reveals - passes 5 arguments to that function as well.
 
-You can actually see the wrapping function detail if you print the value of `require("modul").wrapper` (You can do that in a REPL session).
+You can actually see the wrapping function detail if you print the value of `require("module").wrapper` (You can do that in a REPL session).
 
 ----
 (function(exports, require, module, __filename, __dirname) {
@@ -360,7 +360,7 @@ Note how I used `process.env` variables to make the configurations customizable 
 
 To understand another concept about how Node modules work, let's repeat the `require` line in `main.js` multiple times:
 
-.In Index.js
+.In `main.js`
 ----
 require("./config.js");
 require("./config.js");
@@ -390,7 +390,7 @@ To make the API a function, you need to use `module.exports` (`exports` is only 
 module.exports = () => {
   return {
     PORT: process.env.PORT ?? 8080;
-    SERVER_URL: (host = process.env.PORT ?? "localhost") =>
+    SERVER_URL: (host = process.env.HOST ?? "localhost") =>
       `http://${host}:${exports.PORT}`;
   };
 };
